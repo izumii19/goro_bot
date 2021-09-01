@@ -18,15 +18,20 @@ async def reply(message):
     reply = f'{message.content} は受け付けました' # 返信メッセージの作成
     await message.channel.send(reply) # 返信メッセージを送信
 
-# 発言時に実行されるイベントハンドラを定義
+# メッセージ受信時に動作する処理
 @client.event
 async def on_message(message):
     # メッセージ送信者がBotだった場合は無視する
     if message.author.bot:
         return
     # 「/neko」と発言したら「にゃーん」が返る処理
-    if message.content == '#8888':
-        await reply(message) # 返信する非同期関数を実行
+    if message.content == '/neko':
+        await message.channel.send('にゃーん')
+        
+    #p = r'\[.*\]'  # []に囲まれている任意の文字
+    #msg = re.findall(p, message.content)[0]  # パターンに当てはまるものを抽出
+    #msg = msg[1:-1]
+    #print(msg)
 
 # Botの起動とDiscordサーバーへの接続
 client.run(TOKEN)
